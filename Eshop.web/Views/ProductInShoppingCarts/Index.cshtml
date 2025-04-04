@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Eshop.Domain.DomainModels.ProductInShoppingCart>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    double total = 0.0;
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product)
+            </th>
+            @*             <th>
+                @Html.DisplayNameFor(model => model.ShoppingCart)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.ProductPrice)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.ProductName)
+                </td>
+                @*             <td>
+                @Html.DisplayFor(modelItem => item.ShoppingCart.Id)
+            </td> *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.ProductPrice)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+            
+             total += item.Quantity * item.Product.ProductPrice;
+            
+        }
+    </tbody>
+</table>
+
+<div class="row">
+    <div class="col-1 fw-bold" style="width: 10%">Total Amount:</div>
+    <div class="col align-content-center" >
+        @total
+    </div>
+    
+</div>
