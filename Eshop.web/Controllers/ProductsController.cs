@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using System.Security.Claims;
 using Eshop.Domain.DomainModels;
-using Eshop.Repository;
-using Microsoft.AspNetCore.Identity;
 using Eshop.Domain.identity;
 using Eshop.Service.Interface;
 using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Eshop.web.Controllers
 {
@@ -21,8 +14,8 @@ namespace Eshop.web.Controllers
         private readonly IProductService productService;
         private readonly IProductInShoppingCartService productInShoppingCartService;
 
-        public ProductsController(UserManager<EshopUser> userManager, 
-            IProductService productService,IProductInShoppingCartService prodInshoppingCartService)
+        public ProductsController(UserManager<EshopUser> userManager,
+            IProductService productService, IProductInShoppingCartService prodInshoppingCartService)
         {
             _userManager = userManager;
             this.productService = productService;
@@ -40,12 +33,12 @@ namespace Eshop.web.Controllers
         // GET: Products/Details/5
         public IActionResult Details(Guid? id)
         {
-            
+
             //MVC
             //var product = await _context.Products
             //    .FirstOrDefaultAsync(m => m.Id == id);
 
-            if(id == null) return BadRequest();
+            if (id == null) return BadRequest();
 
             var product = productService.GetById((Guid)id);
 
@@ -88,15 +81,16 @@ namespace Eshop.web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public  IActionResult AddToCart(Guid productId)
+        public IActionResult AddToCart(Guid productId)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            if (userId == null) {
+            if (userId == null)
+            {
                 return BadRequest();
             }
 
-            
+
             productInShoppingCartService.AddToCart(productId, userId);
 
             return RedirectToAction(nameof(Index));
@@ -182,7 +176,7 @@ namespace Eshop.web.Controllers
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public  IActionResult DeleteConfirmed(Guid id)
+        public IActionResult DeleteConfirmed(Guid id)
         {
             //var product = await _context.Products.FindAsync(id);
             //if (product != null)

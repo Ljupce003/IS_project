@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Eshop.Domain.DomainModels;
+﻿using Eshop.Domain.DomainModels;
 using Eshop.Repository;
 using Eshop.Service.Interface;
 
@@ -16,7 +11,7 @@ namespace Eshop.Service.Implementation
         private readonly ApplicationDbContext _context;
 
 
-        public ProductService(IRepository<Product> repository, 
+        public ProductService(IRepository<Product> repository,
             IShoppingCartService shoppingCartService,
             ApplicationDbContext context)
         {
@@ -28,12 +23,12 @@ namespace Eshop.Service.Implementation
 
         public List<Product> GetAll()
         {
-            return _repository.GetAll(selector: x=>x).ToList();
+            return _repository.GetAll(selector: x => x).ToList();
         }
 
         public Product? GetById(Guid id)
         {
-            return _repository.Get(selector: x=>x, predicate: x => x.Id==id);
+            return _repository.Get(selector: x => x, predicate: x => x.Id == id);
         }
 
         public Product Add(Product product)
@@ -54,6 +49,6 @@ namespace Eshop.Service.Implementation
             return product;
         }
 
-        
+
     }
 }

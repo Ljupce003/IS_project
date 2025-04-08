@@ -7,13 +7,13 @@ namespace Eshop.Domain.DomainModels
         public Product(Guid id) : base(id)
         {
         }
-        public Product(): base(Guid.Empty) { }
+        public Product() : base(Guid.Empty) { }
 
         public Product(Guid id, string? productName,
             string? productImage,
-            string? productDescription, 
-            int rating, 
-            int productPrice, 
+            string? productDescription,
+            int rating,
+            int productPrice,
             ICollection<ProductInShoppingCart>? productInShoppingCarts) : base(id)
         {
             ProductName = productName;
@@ -24,7 +24,7 @@ namespace Eshop.Domain.DomainModels
             ProductInShoppingCarts = productInShoppingCarts;
         }
 
-        public Product(string? productName, string? productImage, string? productDescription, int rating, int productPrice) :base(Guid.NewGuid())
+        public Product(string? productName, string? productImage, string? productDescription, int rating, int productPrice) : base(Guid.NewGuid())
         {
             ProductName = productName;
             ProductImage = productImage;

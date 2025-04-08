@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Eshop.Domain.DomainModels;
+﻿using Eshop.Domain.DomainModels;
 using Eshop.Repository;
 using Eshop.Service.Interface;
 
@@ -21,12 +16,12 @@ namespace Eshop.Service.Implementation
 
         public List<ShoppingCart> GetAll()
         {
-            return _shoppingCartRepository.GetAll(selector:x => x).ToList();
+            return _shoppingCartRepository.GetAll(selector: x => x).ToList();
         }
 
         public ShoppingCart? GetById(Guid id)
         {
-            return _shoppingCartRepository.Get(selector: x => x,predicate: x => x.Id == id);
+            return _shoppingCartRepository.Get(selector: x => x, predicate: x => x.Id == id);
         }
 
         public ShoppingCart Add(ShoppingCart cart)
@@ -51,7 +46,7 @@ namespace Eshop.Service.Implementation
         public ShoppingCart? GetByUserId(string ownerId)
         {
             return _shoppingCartRepository
-                .Get(selector: x => x, 
+                .Get(selector: x => x,
                 predicate: x => x.OwnerId == ownerId);
         }
     }

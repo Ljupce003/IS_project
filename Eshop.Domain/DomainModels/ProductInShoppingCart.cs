@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Eshop.Domain.DomainModels;
-
-namespace Eshop.Domain.DomainModels
+﻿namespace Eshop.Domain.DomainModels
 {
     public class ProductInShoppingCart : BaseEntity
     {
@@ -9,7 +6,7 @@ namespace Eshop.Domain.DomainModels
         {
         }
 
-        public ProductInShoppingCart() : base(Guid.Empty){ }
+        public ProductInShoppingCart() : base(Guid.Empty) { }
 
         public ProductInShoppingCart(Guid productId, Product? product, Guid shoppingCartId, ShoppingCart? shoppingCart, int quantity) : base(productId)
         {
@@ -19,7 +16,7 @@ namespace Eshop.Domain.DomainModels
             ShoppingCart = shoppingCart;
             Quantity = quantity;
         }
-        public ProductInShoppingCart(Guid id,Guid productId, Product? product, Guid shoppingCartId, ShoppingCart? shoppingCart, int quantity) : base(id)
+        public ProductInShoppingCart(Guid id, Guid productId, Product? product, Guid shoppingCartId, ShoppingCart? shoppingCart, int quantity) : base(id)
         {
             ProductId = productId;
             Product = product;

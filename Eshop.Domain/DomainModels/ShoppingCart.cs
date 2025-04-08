@@ -1,14 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Eshop.Domain.identity;
+﻿using Eshop.Domain.identity;
 
 namespace Eshop.Domain.DomainModels
 {
     public class ShoppingCart : BaseEntity
     {
-        public ShoppingCart(Guid id) : base(id){
+        public ShoppingCart(Guid id) : base(id)
+        {
         }
 
-        public ShoppingCart(Guid id, 
+        public ShoppingCart(Guid id,
             string? ownerId,
             EshopUser? owner,
             ICollection<ProductInShoppingCart>? productInShoppingCarts) : base(id)
@@ -18,7 +18,7 @@ namespace Eshop.Domain.DomainModels
             ProductInShoppingCarts = productInShoppingCarts;
         }
 
-        public ShoppingCart(Guid id,string? ownerId, EshopUser? owner): base(id)
+        public ShoppingCart(Guid id, string? ownerId, EshopUser? owner) : base(id)
         {
             OwnerId = ownerId;
             Owner = owner;

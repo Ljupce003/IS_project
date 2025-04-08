@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Security.Claims;
+using Eshop.Domain.DomainModels;
+using Eshop.Domain.identity;
+using Eshop.Repository;
+using Eshop.Service.Interface;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Eshop.Domain.DomainModels;
-using Eshop.Repository;
-using Microsoft.AspNetCore.Identity;
-using Eshop.Domain.identity;
-using Eshop.Service.Interface;
-using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
 
 namespace Eshop.web.Controllers
 {
@@ -21,7 +17,7 @@ namespace Eshop.web.Controllers
         private readonly UserManager<EshopUser> _userManager;
         private readonly IProductInShoppingCartService productInShoppingCartService;
 
-        public ProductInShoppingCartsController(ApplicationDbContext context, UserManager<EshopUser> userManager,IProductInShoppingCartService productInShoppingCartService)
+        public ProductInShoppingCartsController(ApplicationDbContext context, UserManager<EshopUser> userManager, IProductInShoppingCartService productInShoppingCartService)
         {
             _context = context;
             _userManager = userManager;
@@ -38,7 +34,8 @@ namespace Eshop.web.Controllers
                 .Include(u => u.ShoppingCart)
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
-            if (user == null || user.ShoppingCart == null) {
+            if (user == null || user.ShoppingCart == null)
+            {
                 return NotFound();
             }
 

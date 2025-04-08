@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Eshop.Domain.DomainModels;
+﻿using Eshop.Domain.DomainModels;
 using Eshop.Repository;
 using Eshop.Service.Interface;
-using Microsoft.EntityFrameworkCore;
 
 namespace Eshop.Service.Implementation
 {
@@ -18,25 +12,25 @@ namespace Eshop.Service.Implementation
         private readonly IProductService productService;
         private readonly ApplicationDbContext _context;
 
-        public ProductInShoppingCartService(IRepository<ProductInShoppingCart> repository, 
+        public ProductInShoppingCartService(IRepository<ProductInShoppingCart> repository,
             IShoppingCartService shoppingCartService,
-            IProductService productService,ApplicationDbContext context)
+            IProductService productService, ApplicationDbContext context)
         {
             _repository = repository;
             this.shoppingCartService = shoppingCartService;
-            this.productService = productService;  
+            this.productService = productService;
             _context = context;
         }
 
 
         public List<ProductInShoppingCart> GetAll()
         {
-            return _repository.GetAll(x => x).ToList();    
+            return _repository.GetAll(x => x).ToList();
         }
 
         public ProductInShoppingCart? GetById(Guid id)
         {
-            return _repository.Get(selector:x => x,predicate: x=> x.Id==id);
+            return _repository.Get(selector: x => x, predicate: x => x.Id == id);
         }
 
         public ProductInShoppingCart Add(ProductInShoppingCart product)
@@ -64,11 +58,11 @@ namespace Eshop.Service.Implementation
 
         public void UpdateCartItem(Product product, ShoppingCart shoppingCart)
         {
-            var prodInCart = GetByProductAndCart(product.Id,shoppingCart.Id);
+            var prodInCart = GetByProductAndCart(product.Id, shoppingCart.Id);
 
-            if(prodInCart == null)
+            if (prodInCart == null)
             {
-                var newProdInCart = new ProductInShoppingCart(Guid.NewGuid(),product.Id, product, shoppingCart.Id, shoppingCart,1);
+                var newProdInCart = new ProductInShoppingCart(Guid.NewGuid(), product.Id, product, shoppingCart.Id, shoppingCart, 1);
 
                 _repository.Insert(newProdInCart);
             }
@@ -92,7 +86,7 @@ namespace Eshop.Service.Implementation
 
             if (product == null) throw new Exception("Product was not found");
 
-            var newProdInCart = new ProductInShoppingCart(Guid.NewGuid(),productId, product,cart.Id,cart,quantity);
+            var newProdInCart = new ProductInShoppingCart(Guid.NewGuid(), productId, product, cart.Id, cart, quantity);
 
             _repository.Insert(newProdInCart);
         }

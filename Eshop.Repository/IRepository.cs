@@ -1,13 +1,12 @@
-﻿using System.Buffers.Text;
-using System.ComponentModel.DataAnnotations;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using Eshop.Domain.DomainModels;
 using Microsoft.EntityFrameworkCore.Query;
 
 namespace Eshop.Repository
 {
-    
-    public interface IRepository<T> where T:  BaseEntity {
+
+    public interface IRepository<T> where T : BaseEntity
+    {
 
         T Insert(T entity);
         T Update(T entity);

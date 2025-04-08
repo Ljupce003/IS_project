@@ -1,9 +1,8 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Eshop.Domain.identity;
 using Eshop.Repository;
-using Eshop.Service.Interface;
 using Eshop.Service.Implementation;
+using Eshop.Service.Interface;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +18,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
-builder.Services.AddTransient<IProductService,ProductService>();
+builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddTransient<IProductInShoppingCartService, ProductInShoppingCartService>();
 
